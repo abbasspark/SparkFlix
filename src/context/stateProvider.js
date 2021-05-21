@@ -52,7 +52,7 @@ export const fetchTvShowsData = async (api, setter, limit = 0) => {
     })
     .catch((err) => alert(err.message));
 };
-export const fetchAllData = async (api, setter) => {
+export const fetchAllData = async (api, setter, limit = 0) => {
   await axios
     .get(api)
     .then((res) => {
@@ -62,7 +62,8 @@ export const fetchAllData = async (api, setter) => {
       return res;
     })
     .then((res) => {
-      setter([res.data.results]);
+      let max = limit > 0 ? limit : res.data.results.length;
+      setter(res.data.results.slice(0, max));
       // console.log(data.results);
     })
     .catch((err) => alert(err.message));
@@ -98,10 +99,10 @@ export const StateContextProvider = (props) => {
   // // For Searching purposes :
   // const [searching_tvShows, setSearchingTVShows] = useState(false);
   // const [searching_movies, setSearchingMovies] = useState(false);
-  // const [searching, setSearching] = useState(null);
+  const [searching, setSearching] = useState(null);
 
   // // Search Result :
-  // const [searching_movies_result, setSearchingMoviesResult] = useState([]);
+  //const [searching_result, setSearchingResult] = useState([]);
   // const [searching_tvShows_result, setSearchingTvShowsResult] = useState([]);
 
   return (
@@ -116,6 +117,7 @@ export const StateContextProvider = (props) => {
         tvShows_recommended: [recommendedtvShows, setRecommendedTvShows],
         tvShows_popular: [populartvShows, setPopularTvShows],
         tvShows_genres: [tvgenres, setTvGenres],
+        searching: [searching, setSearching],
       }}
     >
       {props.children}

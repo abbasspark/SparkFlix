@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   GENRES_API_MOVIES,
   GENRES_API_TVSHOWS,
@@ -15,14 +15,15 @@ import Header from "./components/Header";
 import Routes from "./Routes";
 
 function App() {
-  const [swiper, setSwiper] = useContext(StateContext).movies_swiper;
-  const [movies, setMovies] = useContext(StateContext).movies_recommended;
-  const [nowplaying, setNowPlaying] = useContext(StateContext).movies_nowplaying;
-  const [trendingmovies, setTrendingMovies] = useContext(StateContext).movies_trending;
-  const [moviegenres, setMovieGenres] = useContext(StateContext).movies_genres;
-  const [populartvShows, setPopularTvShows] = useContext(StateContext).tvShows_popular;
-  const [tvgenres, setTvGenres] = useContext(StateContext).tvShows_genres;
-  const [tvShows, setTvShows] = useContext(StateContext).tvShows_recommended;
+  const setSwiper = useContext(StateContext).movies_swiper[1];
+  const setMovies = useContext(StateContext).movies_recommended[1];
+  const setNowPlaying = useContext(StateContext).movies_nowplaying[1];
+  const setTrendingMovies = useContext(StateContext).movies_trending[1];
+  const setMovieGenres = useContext(StateContext).movies_genres[1];
+  const setPopularTvShows = useContext(StateContext).tvShows_popular[1];
+  const setTvGenres = useContext(StateContext).tvShows_genres[1];
+  const setTvShows = useContext(StateContext).tvShows_recommended[1];
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchGenresData(GENRES_API_MOVIES, setMovieGenres);
     fetchMoviesData(POPULAR_API_MOVIES, setMovies);
@@ -35,6 +36,7 @@ function App() {
     fetchTvShowsData(TRENDING_API_TVSHOWS_TODAY, setTvShows);
     fetchGenresData(GENRES_API_TVSHOWS, setTvGenres);
   }, [setMovies, setTvShows, setSwiper, setNowPlaying, setTrendingMovies, setMovieGenres, setTvGenres, setPopularTvShows]);
+
   return (
     <BrowserRouter>
       <div>

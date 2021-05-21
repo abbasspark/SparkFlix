@@ -27,8 +27,8 @@ export default function Home() {
           className="swiper-container"
           autoplay={{ delay: 5000 }}
           pagination={{ clickable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+          onSwiper={() => {}}
+          onSlideChange={() => {}}
           grabCursor
           loop
           effect={"fade"}
@@ -64,7 +64,7 @@ export default function Home() {
                     <Link className="watchnow" to={`/movie/${item.id}`}>
                       <i className="fa fa-play"></i> {Lables.watchNow}
                     </Link>
-                    <Link className="bookmark">
+                    <Link className="bookmark" to=".">
                       <i className="fa fa-heart" style={{ fontWeight: "400" }}></i> {Lables.addToList}
                     </Link>
                   </div>
