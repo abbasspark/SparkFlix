@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Tooltip } from "reactstrap";
 import { Link } from "react-router-dom";
-const Example = ({ item, category }) => {
+import { Lables } from "../../SiteData";
+
+const Tooltipster = ({ item, category }) => {
   const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const toggle = () => setTooltipOpen(!tooltipOpen);
@@ -64,7 +66,7 @@ const Example = ({ item, category }) => {
               </a>
 
               <Link className="watchnow" to={`/movie/${item.id}`}>
-                <i className="fa fa-play"></i> Watch now
+                <i className="fa fa-play"></i> {Lables.watchNow}
               </Link>
               <div className="clearfix"></div>
             </div>
@@ -81,4 +83,4 @@ const Example = ({ item, category }) => {
   );
 };
 
-export default Example;
+export default Tooltipster;

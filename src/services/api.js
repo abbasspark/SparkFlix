@@ -13,7 +13,7 @@ export const POPULAR_API_TVSHOWS = "/tv/popular";
 export const GENRES_API_TVSHOWS = "/genre/tv/list";
 
 //SEARCH API
-export const SEARCH_API = "https://api.themoviedb.org/3/search/multi&language=en-US&query=";
+export const SEARCH_API = "/search/multi?page=1&include_adult=false&query=";
 
 //DEFAULT API
 export const DEFAULT_POSTER_Path =

@@ -23,6 +23,7 @@ export const Lables = {
   trending: "Trending",
   latestmovies: "Latest Movies",
   latesttvshows: "Latest TV Shows",
+  viewallresults: "View all results",
 };
 export const HomePage = {
   now_playing: get_Now_Playing,

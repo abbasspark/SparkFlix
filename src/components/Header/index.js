@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HeaderItems } from "../../SiteData";
+import SearchBox from "./SearchBox";
 import { MovieGenres, TvGenres } from "../../services/genres";
 export default function Header() {
   const [movieGenres, setMovieGenres] = useState([]);
   const [tvGenres, setTvGenres] = useState([]);
+  const [keyword, setKeyword] = useState("");
   useEffect(() => {
     async function getData() {
       const objMovies = await MovieGenres();
@@ -34,6 +36,9 @@ export default function Header() {
       ));
     }
   }
+  const handleChange = (event) => {
+    setKeyword(event.target.value);
+  };
   return (
     <header className="home">
       <div className="container">
@@ -75,8 +80,9 @@ export default function Header() {
         </div>
 
         <form id="search" autoComplete="off" action="search">
-          <input type="text" name="keyword" placeholder="Enter your keywords..." autoComplete="off" />
+          <input type="text" name="keyword" placeholder="Enter your keywords..." autoComplete="off" onChange={handleChange} />
           <button></button> <div className="suggestions"></div>
+          <SearchBox keyword={keyword} />
         </form>
       </div>
     </header>
