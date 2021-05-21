@@ -7,6 +7,9 @@ import MovieScroller from "../MovieScroller";
 import TvShowScroller from "../TvShowScroller";
 export default function Body() {
   const [dataType, setDataType] = useState("movies");
+  const [onHover, setOnHover] = useState(false);
+  const [toolTip, setToolTip] = useState({});
+  const [position, setPosition] = useState({ x: 0, y: 0, lr: "left" });
   //Recommended Section
   const [recommendedmovies] = useContext(StateContext).movies_recommended[0];
   const [recommendedtvshows] = useContext(StateContext).tvShows_recommended[0];
@@ -52,33 +55,21 @@ export default function Body() {
           <div className="heading">
             <h2>{Lables.recommended}</h2>
             <div className="tabs">
-              <span
-                className={dataType === "movies" ? "active" : ""}
-                data-name="movies"
-                onClick={handleClick}
-              >
+              <span className={dataType === "movies" ? "active" : ""} data-name="movies" onClick={handleClick}>
                 <i className="fa fa-play-circle"></i> {Lables.movies}
               </span>
-              <span
-                className={dataType === "shows" ? "active" : ""}
-                data-name="shows"
-                onClick={handleClick}
-              >
+              <span className={dataType === "shows" ? "active" : ""} data-name="shows" onClick={handleClick}>
                 <i className="fa fa-list"></i> {Lables.tvshows}
               </span>
-              <span
-                className={dataType === "trending" ? "active" : ""}
-                data-name="trending"
-                onClick={handleClick}
-              >
+              <span className={dataType === "trending" ? "active" : ""} data-name="trending" onClick={handleClick}>
                 <i className="fa fa-chart-line"></i> {Lables.trending}
               </span>
             </div>
             <div className="clearfix"></div>
           </div>
           {dataType === "shows"
-            ? dataSource && <TvShowScroller data={dataSource} />
-            : dataSource && <MovieScroller data={dataSource} />}
+            ? dataSource && <TvShowScroller data={dataSource} category={dataType} />
+            : dataSource && <MovieScroller data={dataSource} category={dataType} />}
           <div className="clearfix"></div>
         </section>
         <section className="bl">
@@ -86,7 +77,7 @@ export default function Body() {
             <h2>{Lables.latestmovies}</h2>
             <div className="clearfix"></div>
           </div>
-          {nowPlayingMovies && <MovieScroller data={nowPlayingMovies} />}
+          {nowPlayingMovies && <MovieScroller data={nowPlayingMovies} category="latest" />}
           <div className="clearfix"></div>
         </section>
         <section className="bl">
@@ -94,7 +85,7 @@ export default function Body() {
             <h2>{Lables.latesttvshows}</h2>
             <div className="clearfix"></div>
           </div>
-          {populartv && <TvShowScroller data={populartv} />}
+          {populartv && <TvShowScroller data={populartv} category="latesttvshows" />}
         </section>
       </div>
     </div>

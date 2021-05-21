@@ -3,14 +3,7 @@ import { Link } from "react-router-dom";
 import { Lables } from "../../SiteData";
 import { ImageBaseUrl } from "../../config";
 import { StateContext } from "../../context/stateProvider";
-import SwiperCore, {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  Autoplay,
-  EffectFade,
-} from "swiper";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, Autoplay, EffectFade } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -59,11 +52,7 @@ export default function Home() {
                     <span>{`${item.runtime} min`} </span>
                     <span>
                       {item.genres.map((genre) => (
-                        <Link
-                          key={genre.id}
-                          to={`/genre/movie/${genre.id}`}
-                          title={genre.name}
-                        >
+                        <Link key={genre.id} to={`/genre/movie/${genre.id}`} title={genre.name}>
                           {genre.name}
                         </Link>
                       ))}
@@ -76,11 +65,7 @@ export default function Home() {
                       <i className="fa fa-play"></i> {Lables.watchNow}
                     </Link>
                     <Link className="bookmark">
-                      <i
-                        className="fa fa-heart"
-                        style={{ fontWeight: "400" }}
-                      ></i>{" "}
-                      {Lables.addToList}
+                      <i className="fa fa-heart" style={{ fontWeight: "400" }}></i> {Lables.addToList}
                     </Link>
                   </div>
                 </div>

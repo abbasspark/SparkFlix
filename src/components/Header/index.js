@@ -75,12 +75,7 @@ export default function Header() {
         </div>
 
         <form id="search" autoComplete="off" action="search">
-          <input
-            type="text"
-            name="keyword"
-            placeholder="Enter your keywords..."
-            autoComplete="off"
-          />
+          <input type="text" name="keyword" placeholder="Enter your keywords..." autoComplete="off" />
           <button></button> <div className="suggestions"></div>
         </form>
       </div>
