@@ -9,7 +9,7 @@ export default function SearchBox({ keyword = "" }) {
   const [searching, setSearching] = useContext(StateContext).searching;
 
   useEffect(() => {
-    if (keyword !== "") {
+    if (keyword.trim() !== "") {
       fetchAllData(`${SEARCH_API}${keyword}`, setSearching, 5);
     } else {
       setSearching(null);
