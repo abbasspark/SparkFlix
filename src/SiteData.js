@@ -5,7 +5,7 @@ export const HeaderItems = [
   { id: 4, name: "Movies", link: ".", isMenu: true, isTvShow: false },
   {
     id: 5,
-    name: "TV-Shows",
+    name: "TV Shows",
     link: ".",
     isMenu: true,
     isTvShow: true,
@@ -36,7 +36,7 @@ export const FooterItems = {
   warning: ` This site does not store any files on our server, we only linked to the media which is hosted on 3rd party services.`,
   links: [
     { id: 1, name: "Movies", link: "/home" },
-    { id: 2, name: "TV-Shows", link: "/home" },
+    { id: 2, name: "TV Shows", link: "/home" },
     { id: 3, name: "Up Coming", link: "/upcoming" },
     { id: 4, name: "Top IMDb", link: "/topimdb" },
   ],
