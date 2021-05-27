@@ -24,7 +24,7 @@ class Pagination extends Component {
   constructor(props) {
     super(props);
     const { totalPages = null, totalRecords = null, pageLimit = 30, pageNeighbours = 0 } = props;
-    console.log({ props });
+
     this.pageLimit = typeof pageLimit === "number" ? pageLimit : 30;
     this.totalRecords = typeof totalRecords === "number" ? totalRecords : 0;
     this.totalPages = typeof totalPages === "number" ? totalPages : 0;
@@ -150,7 +150,7 @@ class Pagination extends Component {
             if (page === LEFT_PAGE)
               return (
                 <li key={index}>
-                  <Link aria-label="Previous" onClick={this.handleMoveLeft}>
+                  <Link to="" aria-label="Previous" onClick={this.handleMoveLeft}>
                     <span>←</span>
                   </Link>
                 </li>
@@ -159,7 +159,7 @@ class Pagination extends Component {
             if (page === RIGHT_PAGE)
               return (
                 <li key={index}>
-                  <Link aria-label="Next" onClick={this.handleMoveRight}>
+                  <Link to="" aria-label="Next" onClick={this.handleMoveRight}>
                     <span>→</span>
                   </Link>
                 </li>
@@ -167,7 +167,9 @@ class Pagination extends Component {
 
             return (
               <li key={index} className={currentPage === page ? " active" : ""}>
-                <Link onClick={this.handleClick(page)}>{page}</Link>
+                <Link to="" onClick={this.handleClick(page)}>
+                  {page}
+                </Link>
               </li>
             );
           })}

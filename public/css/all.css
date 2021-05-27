@@ -9669,6 +9669,11 @@ header #menu > li > ul > li > a:hover {
   border-radius: 0.25rem;
   color: #00acc1;
 }
+header #menu > li > ul > li > a.active {
+  background: #16181b;
+  border-radius: 0.25rem;
+  color: #00acc1;
+}
 header #search-toggler {
   display: none;
 }

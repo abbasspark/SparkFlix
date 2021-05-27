@@ -5,28 +5,56 @@ import { HeaderItems } from "../../SiteData";
 import SearchBox from "./SearchBox";
 
 export default function Header() {
+  const [params, setparams] = useState({});
+  const [pathname, setPathname] = useState(window.location.pathname);
   const movieGenres = useContext(StateContext).movies_genres[0];
   const tvGenres = useContext(StateContext).tvShows_genres[0];
+  useEffect(() => {
+    if (movieGenres.length > 0 && tvGenres.length > 0) {
+      let type = pathname.split("/")[2];
+      let id = parseInt(pathname.split("/")[3]);
+      let currentItem = type === "tv" ? tvGenres.find((x) => x.id === id) : movieGenres.find((x) => x.id === id);
 
+      let name = currentItem.name;
+
+      setparams({
+        id,
+        name,
+        type,
+      });
+    }
+  }, [movieGenres, tvGenres, pathname]);
   const [keyword, setKeyword] = useState("");
 
   function Genres({ data }) {
     if (data.isTvShow) {
-      return tvGenres.map((item) => (
-        <li key={item.id}>
-          <Link title={item.name} to={`/genre/tv/${item.id}`}>
-            {item.name}
-          </Link>
-        </li>
-      ));
+      return tvGenres.map((item) => {
+        return (
+          <li key={item.id}>
+            <a
+              title={item.name}
+              href={`/genre/tv/${item.id}`}
+              className={item.id === params.id ? (params.type === "tv" ? "active" : "") : ""}
+            >
+              {item.name}
+            </a>
+          </li>
+        );
+      });
     } else {
-      return movieGenres.map((item) => (
-        <li key={item.id}>
-          <Link title={item.name} to={`/genre/movie/${item.id}`}>
-            {item.name}
-          </Link>
-        </li>
-      ));
+      return movieGenres.map((item) => {
+        return (
+          <li key={item.id}>
+            <a
+              title={item.name}
+              href={`/genre/movie/${item.id}`}
+              className={item.id === params.id ? (params.type === "movie" ? "active" : "") : ""}
+            >
+              {item.name}
+            </a>
+          </li>
+        );
+      });
     }
   }
   const handleChange = (event) => {
@@ -38,17 +66,17 @@ export default function Header() {
         <div id="menu-toggler">
           <i className="fa fa-list-ul"></i>
         </div>
-        <Link to="/" id="logo">
+        <a href="/" id="logo">
           <h2>Watch Movies Online Free</h2>
-        </Link>
+        </a>
         <ul id="menu">
           {HeaderItems.map((item) => {
             if (item.isMenu) {
               return (
                 <li key={item.id}>
-                  <Link to={item.link}>
+                  <a href={item.link}>
                     {item.name} <i className="fa fa-plus"></i>
-                  </Link>
+                  </a>
                   <ul className="genre">
                     <Genres data={item} />
                   </ul>
@@ -57,7 +85,7 @@ export default function Header() {
             }
             return (
               <li key={item.id}>
-                <Link to={item.link}>{item.name}</Link>
+                <a href={item.link}>{item.name}</a>
               </li>
             );
           })}
