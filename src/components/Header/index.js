@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-
+import { Link } from "react-router-dom";
 import { StateContext } from "../../context/stateProvider";
 import { HeaderItems } from "../../SiteData";
 import SearchBox from "./SearchBox";
@@ -10,7 +10,7 @@ export default function Header() {
   const movieGenres = useContext(StateContext).movies_genres[0];
   const tvGenres = useContext(StateContext).tvShows_genres[0];
   useEffect(() => {
-    if (movieGenres.length > 0 && tvGenres.length > 0) {
+    if (movieGenres.length > 0 && tvGenres.length > 0 && pathname.split("/").length > 2) {
       let type = pathname.split("/")[2];
       let id = parseInt(pathname.split("/")[3]);
       let currentItem = type === "tv" ? tvGenres.find((x) => x.id === id) : movieGenres.find((x) => x.id === id);

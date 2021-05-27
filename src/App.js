@@ -11,7 +11,7 @@ import {
 import { StateContext, fetchGenresData, fetchMoviesData, fetchTvShowsData } from "./context/stateProvider";
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
-
+import Footer from "./components/Footer";
 import Routes from "./Routes";
 
 function App() {
@@ -41,10 +41,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
+      <div id="body">
         <Header />
         {!loading && <Routes />}
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -174,6 +174,7 @@ class Pagination extends Component {
             );
           })}
         </ul>
+        <div className="clearfix"></div>
       </div>
     );
   }

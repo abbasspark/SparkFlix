@@ -9680,9 +9680,9 @@ header #search-toggler {
 header #search {
   width: 380px;
   height: 45px;
-  float: left;
+  float: right;
   position: relative;
-  margin-left: 4em;
+  margin-right: 4em;
 }
 header #search input {
   width: 100%;

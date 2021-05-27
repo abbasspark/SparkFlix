@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { fetchGenres } from "../../context/stateProvider";
+import { fetchGenres, StateContext } from "../../context/stateProvider";
 import MovieScroller from "../MovieScroller";
 import TvShowScroller from "../TvShowScroller";
 import Pagination from "../Pagination/Pagination";
-import { StateContext } from "../../context/stateProvider";
+
 import Slider from "../Slider";
 export default function Genre() {
   const params = useParams();
@@ -16,6 +16,7 @@ export default function Genre() {
   const [genreName, setGenreName] = useState("");
   useEffect(() => {
     function getGenre() {
+      console.log({ params });
       if (params.type === "tv") {
         if (tvGenres.length > 0) {
           let obj = tvGenres.find((x) => x.id.toString() === params.id);
@@ -54,7 +55,7 @@ export default function Genre() {
   return (
     <div>
       <Slider />
-      <div className="container ">
+      <div id="genre_container" className="container ">
         <section className="bl">
           <div className="heading">
             <h2>{`${genreName}${params.type === "tv" ? " -TV SHOWS" : " -MOVIES"}`}</h2>

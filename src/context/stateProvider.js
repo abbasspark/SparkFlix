@@ -101,6 +101,58 @@ export const fetchGenres = async (params, page) => {
     })
     .catch((err) => alert(err.message));
 };
+
+export const fetchList = async (page, type) => {
+  let movie_api;
+  let tv_api;
+  switch (type) {
+    case "/upcoming":
+      movie_api = `/movie/upcoming?page=${page}`;
+      tv_api = `/tv/on_the_air?page=${page}`;
+      break;
+    case "/topimdb":
+      movie_api = `/movie/top_rated?page=${page}`;
+      tv_api = `/tv/top_rated?page=${page}`;
+      break;
+    default:
+      movie_api = `/movie/top_rated?page=${page}`;
+      tv_api = `/tv/top_rated?page=${page}`;
+      break;
+  }
+  let movie_data = await axios
+    .get(movie_api)
+    .then((res) => {
+      let result = [];
+      if (res.status !== 200) {
+        alert("Something Went Wrong in fetchUpComing !");
+      }
+      for (let i = 0; i <= res.data.results.length - 1; i++) {
+        let tvshow = res.data.results[i]; //await axios.get(`/tv/${res.data.results[i].id}`);
+        tvshow.type = "Movie";
+        tvshow.quality = "HD";
+        result.push(tvshow);
+      }
+      return { result, totalPages: res.data.total_pages };
+    })
+    .catch((err) => alert(err.message));
+  let tv_data = await axios
+    .get(tv_api)
+    .then((res) => {
+      let result = [];
+      if (res.status !== 200) {
+        alert("Something Went Wrong in fetchTopImdb !");
+      }
+      for (let i = 0; i <= res.data.results.length - 1; i++) {
+        let tvshow = res.data.results[i]; //await axios.get(`/tv/${res.data.results[i].id}`);
+        tvshow.type = "tv";
+        tvshow.quality = "HD";
+        result.push(tvshow);
+      }
+      return { result, totalPages: res.data.total_pages };
+    })
+    .catch((err) => alert(err.message));
+  return { movie_data, tv_data };
+};
 export const StateContextProvider = (props) => {
   // For Home Page Display
   //MOVIES
