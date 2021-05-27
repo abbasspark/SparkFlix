@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+
 import { StateContext } from "../../context/stateProvider";
 import { HeaderItems } from "../../SiteData";
 import SearchBox from "./SearchBox";
 
 export default function Header() {
   const [params, setparams] = useState({});
-  const [pathname, setPathname] = useState(window.location.pathname);
+  const pathname = window.location.pathname;
   const movieGenres = useContext(StateContext).movies_genres[0];
   const tvGenres = useContext(StateContext).tvShows_genres[0];
   useEffect(() => {
