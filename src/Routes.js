@@ -7,9 +7,9 @@ import NotFound from "./components/404";
 export default function Routes() {
   return (
     <Switch>
+      <Route exact path="/" component={Home} />
       <Route exact path="/home" component={Home} />
       <Route path="/genre/:type/:id" component={Genre} />
-      <Redirect from="/" to="/home" />
       <Route component={NotFound} />
     </Switch>
   );

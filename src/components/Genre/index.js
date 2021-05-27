@@ -5,6 +5,7 @@ import MovieScroller from "../MovieScroller";
 import TvShowScroller from "../TvShowScroller";
 import Pagination from "../Pagination/Pagination";
 import { StateContext } from "../../context/stateProvider";
+import Slider from "../Slider";
 export default function Genre() {
   const params = useParams();
   const movieGenres = useContext(StateContext).movies_genres[0];
@@ -52,6 +53,7 @@ export default function Genre() {
 
   return (
     <div>
+      <Slider />
       <div className="container ">
         <section className="bl">
           <div className="heading">

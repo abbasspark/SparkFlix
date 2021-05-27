@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Lables } from "../../SiteData";
-
+import Slider from "../Slider";
 import { StateContext } from "../../context/stateProvider";
 
 import MovieScroller from "../MovieScroller";
@@ -48,6 +48,7 @@ export default function Home() {
   };
   return (
     <div>
+      <Slider />
       <div className="container">
         <section className="bl">
           <div className="heading">

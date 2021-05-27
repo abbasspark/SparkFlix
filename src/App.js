@@ -11,7 +11,7 @@ import {
 import { StateContext, fetchGenresData, fetchMoviesData, fetchTvShowsData } from "./context/stateProvider";
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
-import Slider from "./components/Slider";
+
 import Routes from "./Routes";
 
 function App() {
@@ -43,7 +43,6 @@ function App() {
     <BrowserRouter>
       <div>
         <Header />
-        <Slider />
         {!loading && <Routes />}
       </div>
     </BrowserRouter>
