@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { StateContext } from "../../context/stateProvider";
 import { Tooltip } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Lables } from "../../SiteData";
-
+import { get_Genres } from "../../utils/functions";
 const Tooltipster = ({ item, category }) => {
+  const movieGenres = useContext(StateContext).movies_genres[0];
+  const tvgenres = useContext(StateContext).tvShows_genres[0];
+  const genres = get_Genres(item, tvgenres, movieGenres);
   const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const toggle = () => setTooltipOpen(!tooltipOpen);
-
+  const getLink = (id) => (item.type === "TV" ? `/genre/tv/${id}` : `/genre/movie/${id}`);
   return (
     <Tooltip
       placement="auto"
@@ -35,7 +39,7 @@ const Tooltipster = ({ item, category }) => {
                 <i className="fa fa-star"></i> {item.vote_average}
               </span>
               {item.type === "Movie" && <span>{item.release_date ? item.release_date.slice(0, 4) : ""}</span>}
-              {item.type === "Movie" && <span>{item.runtime} min</span>}
+              {/* {item.type === "Movie" && <span>{item.runtime} min</span>} */}
               <span className="text-right">
                 <span className="quality">{item.quality}</span>
               </span>
@@ -45,8 +49,8 @@ const Tooltipster = ({ item, category }) => {
               <div>
                 <span>Genre: </span>
                 <span>
-                  {item.genres.map((item) => (
-                    <Link to={`/genre/${item.id}`} title={item.name} key={item.id}>
+                  {genres.map((item) => (
+                    <Link to={getLink(item.id)} title={item.name} key={item.id}>
                       <i className="genre">{item.name} </i>
                     </Link>
                   ))}

@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { StateContext } from "../../context/stateProvider";
 import { HeaderItems } from "../../SiteData";
 import SearchBox from "./SearchBox";
-import { MovieGenres, TvGenres } from "../../services/genres";
-export default function Header() {
-  const [movieGenres, setMovieGenres] = useState([]);
-  const [tvGenres, setTvGenres] = useState([]);
-  const [keyword, setKeyword] = useState("");
-  useEffect(() => {
-    async function getData() {
-      const objMovies = await MovieGenres();
-      const objtv = await TvGenres();
 
-      setMovieGenres(objMovies);
-      setTvGenres(objtv);
-    }
-    getData();
-  }, []);
+export default function Header() {
+  const movieGenres = useContext(StateContext).movies_genres[0];
+  const tvGenres = useContext(StateContext).tvShows_genres[0];
+
+  const [keyword, setKeyword] = useState("");
+
   function Genres({ data }) {
     if (data.isTvShow) {
       return tvGenres.map((item) => (

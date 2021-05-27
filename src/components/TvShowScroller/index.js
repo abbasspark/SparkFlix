@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ImageBaseUrl } from "../../config";
+import { IMAGE_API, DEFAULT_POSTER_Path } from "../../services/api";
 import Tootipster from "../ToolTip";
 export default function TvShowScroller({ data, category }) {
   return (
@@ -12,7 +12,7 @@ export default function TvShowScroller({ data, category }) {
               <div className="quality">{item.quality}</div>
             </div>
             <Link to={`/tv/${item.id}`} className="poster">
-              <img src={`${ImageBaseUrl}${item.poster_path}`} alt={item.id} />
+              <img src={item.poster_path ? `${IMAGE_API}${item.poster_path}` : DEFAULT_POSTER_Path} alt={item.id} />
             </Link>
             <span className="imdb">
               <i className="fa fa-star"></i> {item.vote_average}
@@ -23,12 +23,13 @@ export default function TvShowScroller({ data, category }) {
               </Link>
             </h3>
             <div className="meta">
-              {`SS ${item.number_of_seasons}`} <i className="dot"></i> {`EP ${item.episode_count}`}{" "}
+              {item.first_air_date}
               <i className="type">{item.type}</i>
             </div>
             {item && <Tootipster item={item} category={category} />}
           </div>
         ))}
+        <div className="clearfix"></div>
       </div>
     </div>
   );

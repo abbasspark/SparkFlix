@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ImageBaseUrl } from "../../config";
+import { IMAGE_API, DEFAULT_POSTER_Path } from "../../services/api";
 
 import Tootipster from "../ToolTip";
 export default function MovieScroller({ data, category }) {
@@ -13,7 +13,7 @@ export default function MovieScroller({ data, category }) {
               <div className="quality">{item.quality}</div>
             </div>
             <Link to={`/movie/${item.id}`} className="poster">
-              <img src={`${ImageBaseUrl}${item.poster_path}`} alt={item.id} />
+              <img src={item.poster_path ? `${IMAGE_API}${item.poster_path}` : DEFAULT_POSTER_Path} alt={item.id} />
             </Link>
 
             <span className="imdb">
@@ -25,7 +25,7 @@ export default function MovieScroller({ data, category }) {
               </Link>
             </h3>
             <div className="meta">
-              {item.release_date ? item.release_date.slice(0, 4) : ""} <i className="dot"></i> {item.runtime} min{" "}
+              {item.release_date ? item.release_date : ""} {/*<i className="dot"></i> {item.runtime} min{" "}*/}
               <i className="type">{item.type}</i>
             </div>
             {item && <Tootipster item={item} category={category} />}

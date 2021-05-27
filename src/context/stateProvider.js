@@ -16,10 +16,10 @@ export const fetchMoviesData = async (api, setter, limit = 0) => {
       let result = [];
       let max = limit > 0 ? limit : res.data.results.length - 5;
       for (let i = 0; i <= max; i++) {
-        let movie = await axios.get(`/movie/${res.data.results[i].id}`);
-        movie.data.type = "Movie";
-        movie.data.quality = "HD";
-        result.push(movie.data);
+        let movie = res.data.results[i]; //await axios.get(`/movie/${res.data.results[i].id}`);
+        movie.type = "Movie";
+        movie.quality = "HD";
+        result.push(movie);
       }
       setter([result]);
       // console.log(data.results);
@@ -39,13 +39,10 @@ export const fetchTvShowsData = async (api, setter, limit = 0) => {
       let result = [];
       let max = limit > 0 ? limit : res.data.results.length - 5;
       for (let i = 0; i <= max; i++) {
-        let tvshow = await axios.get(`/tv/${res.data.results[i].id}`);
-        tvshow.data.type = "TV";
-        tvshow.data.quality = "HD";
-        tvshow.data.episode_count = tvshow.data.seasons.filter(
-          (x) => x.season_number === tvshow.data.number_of_seasons
-        )[0].episode_count;
-        result.push(tvshow.data);
+        let tvshow = res.data.results[i]; //await axios.get(`/tv/${res.data.results[i].id}`);
+        tvshow.type = "TV";
+        tvshow.quality = "HD";
+        result.push(tvshow);
       }
       setter([result]);
       // console.log(data.results);
@@ -78,8 +75,29 @@ export const fetchGenresData = async (api, setter) => {
       return res;
     })
     .then((res) => {
-      setter([res.data.genres]);
+      setter(res.data.genres);
       // console.log(data.results);
+    })
+    .catch((err) => alert(err.message));
+};
+export const fetchGenres = async (params, page) => {
+  let { type, id } = params;
+  let api = `/discover/${type}?with_genres=${id}&page=${page}`;
+
+  return await axios
+    .get(api)
+    .then((res) => {
+      let result = [];
+      if (res.status !== 200) {
+        alert("Something Went Wrong in fetchGenresData !");
+      }
+      for (let i = 0; i <= res.data.results.length - 1; i++) {
+        let tvshow = res.data.results[i]; //await axios.get(`/tv/${res.data.results[i].id}`);
+        tvshow.type = type === "tv" ? "TV" : "Movie";
+        tvshow.quality = "HD";
+        result.push(tvshow);
+      }
+      return { result, totalPages: res.data.total_pages };
     })
     .catch((err) => alert(err.message));
 };

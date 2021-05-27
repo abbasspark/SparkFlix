@@ -50,13 +50,13 @@ export default function Home() {
                       <i className="fa fa-star"></i> {item.vote_average}
                     </span>
                     <span>{`${item.runtime} min`} </span>
-                    <span>
+                    {/* <span>
                       {item.genres.map((genre) => (
                         <Link key={genre.id} to={`/genre/movie/${genre.id}`} title={genre.name}>
                           {genre.name}
                         </Link>
                       ))}
-                    </span>
+                    </span> */}
                     <span> {item.release_date} </span>
                   </div>
                   <div className="desc">{item.overview}</div>

@@ -11,7 +11,7 @@ import {
 import { StateContext, fetchGenresData, fetchMoviesData, fetchTvShowsData } from "./context/stateProvider";
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
-
+import Slider from "./components/Slider";
 import Routes from "./Routes";
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
   const setTvShows = useContext(StateContext).tvShows_recommended[1];
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     fetchGenresData(GENRES_API_MOVIES, setMovieGenres);
     fetchMoviesData(POPULAR_API_MOVIES, setMovies);
     fetchMoviesData(NOW_PLAYING_API_MOVIES, setSwiper, 10);
@@ -35,13 +36,15 @@ function App() {
     fetchTvShowsData(POPULAR_API_TVSHOWS, setPopularTvShows);
     fetchTvShowsData(TRENDING_API_TVSHOWS_TODAY, setTvShows);
     fetchGenresData(GENRES_API_TVSHOWS, setTvGenres);
+    setLoading(false);
   }, [setMovies, setTvShows, setSwiper, setNowPlaying, setTrendingMovies, setMovieGenres, setTvGenres, setPopularTvShows]);
 
   return (
     <BrowserRouter>
       <div>
         <Header />
-        <Routes />
+        <Slider />
+        {!loading && <Routes />}
       </div>
     </BrowserRouter>
   );
